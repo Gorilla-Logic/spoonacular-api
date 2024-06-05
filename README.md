@@ -23,12 +23,12 @@ The authentication filter is injected into the security configuration component 
 
 `UnauthorizedHandler` is an exception handler provided to the security filter chain that is responsible for sending the status code 401 to the client if any error occurs at the authentication entry point.
 
-### API
+### Recipes API
 
 ![spoonacular_structure_diagram](./documents/spoonacular_structure_diagram.png) 
 > Please see documentation on each Class for further explanation on how the API works.
 
-The Spoonacular API includes endpoints for:
+The Recipes API includes endpoints for:
 - Creating a new recipe
 - Retrieving recipes by their IDs
 - Searching for recipes
@@ -37,6 +37,17 @@ The Spoonacular API includes endpoints for:
 - Retrieving a recipe's rating.
 
 ![spoonacular_swagger](./documents/spoonacular_swagger.png)
+
+### Spoonacular API
+
+![spoonacular_api](./documents/spoonacular_api.png)
+> Please see documentation on each Class for further explanation on how the API works.
+
+The Spoonacular API includes endpoints to:
+- Get recipes summary given a search criteria.
+- Get a recipe summary given an ID.
+
+![spoonacular_api_swagger](./documents/spoonacular_api_swagger.png)
 
 ## MongoDB
 
