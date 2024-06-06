@@ -24,6 +24,8 @@ public interface RecipeRepository {
 
     RecipeEntity findOne(String id);
 
+    RecipeEntity findOneByExternalId(int externalId);
+
     List<RecipeEntity> search(String query);
 
     RecipeEntity update(RecipeEntity RecipeEntity);

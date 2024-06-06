@@ -68,6 +68,11 @@ public class MongoDBRecipeRepository implements RecipeRepository {
     }
 
     @Override
+    public RecipeEntity findOneByExternalId(int externalId) {
+        return recipeCollection.find(eq("externalId", externalId)).first();
+    }
+
+    @Override
     public List<RecipeEntity> search(String query) {
         return recipeCollection.find(text(query)).into(new ArrayList<>());
     }

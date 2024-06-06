@@ -41,9 +41,18 @@ public class SpoonacularServiceImpl implements SpoonacularService {
     public JsonObject findOne(int id) {
         String uri = String.format("%s/%s/information?apiKey=%s", baseUrl, id, apiKey);
         String response = this.restTemplate.getForObject(uri, String.class);
+        JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
 
-        if (response != null && !response.isEmpty()) return JsonParser.parseString(response).getAsJsonObject();
-        return new JsonObject();
+        RecipeEntity recipeEntity = recipeRepository.findOneByExternalId(id);
+
+        if (Optional.ofNullable(jsonObject.get("title")).isPresent()) recipeEntity.setTitle(jsonObject.get("title").getAsString());
+        if (Optional.ofNullable(jsonObject.get("image")).isPresent()) recipeEntity.setImage(jsonObject.get("image").getAsString());
+        if (Optional.ofNullable(jsonObject.get("servings")).isPresent()) recipeEntity.setServings(jsonObject.get("servings").getAsInt());
+        if (Optional.ofNullable(jsonObject.get("readyInMinutes")).isPresent()) recipeEntity.setReadyInMinutes(jsonObject.get("readyInMinutes").getAsInt());
+
+        recipeRepository.update(recipeEntity);
+
+        return jsonObject;
     }
 
     @Override
