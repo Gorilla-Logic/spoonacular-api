@@ -1,5 +1,8 @@
 package com.spoonacular.api.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -24,6 +27,9 @@ public class RecipeEntity {
     private int servings;
     private String title;
     private List<Integer> ratings;
+    @Getter
+    @Setter
+    private int externalId;
 
     public RecipeEntity() {
     }
@@ -33,13 +39,15 @@ public class RecipeEntity {
                         String sourceUrl,
                         String image,
                         int servings,
-                        String title) {
+                        String title,
+                        int externalId) {
         this.id = id;
         this.readyInMinutes = readyInMinutes;
         this.sourceUrl = sourceUrl;
         this.image = image;
         this.servings = servings;
         this.title = title;
+        this.externalId = externalId;
     }
 
     public ObjectId getId() {
@@ -103,12 +111,12 @@ public class RecipeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecipeEntity that = (RecipeEntity) o;
-        return readyInMinutes == that.readyInMinutes && servings == that.servings && Objects.equals(id, that.id) && Objects.equals(sourceUrl, that.sourceUrl) && Objects.equals(image, that.image) && Objects.equals(title, that.title) && Objects.equals(ratings, that.ratings);
+        return readyInMinutes == that.readyInMinutes && servings == that.servings && externalId == that.externalId && Objects.equals(id, that.id) && Objects.equals(sourceUrl, that.sourceUrl) && Objects.equals(image, that.image) && Objects.equals(title, that.title) && Objects.equals(ratings, that.ratings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, readyInMinutes, sourceUrl, image, servings, title, ratings);
+        return Objects.hash(id, readyInMinutes, sourceUrl, image, servings, title, ratings, externalId);
     }
 
     @Override
@@ -121,6 +129,7 @@ public class RecipeEntity {
                 ", servings=" + servings +
                 ", title='" + title + '\'' +
                 ", ratings=" + ratings +
+                ", externalId=" + externalId +
                 '}';
     }
 }

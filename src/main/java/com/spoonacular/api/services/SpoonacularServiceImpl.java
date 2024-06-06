@@ -2,11 +2,15 @@ package com.spoonacular.api.services;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.spoonacular.api.models.RecipeEntity;
+import com.spoonacular.api.repositories.RecipeRepository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 /**
  * The SpoonacularServiceImpl class is a service class in this Spring Boot application that implements the SpoonacularService interface.
@@ -21,14 +25,16 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class SpoonacularServiceImpl implements SpoonacularService {
 
-    private final RestTemplate restTemplate;
     @Value("${application.security.spoonacular.apiKey}")
     private String apiKey;
     @Value("${application.security.spoonacular.baseUrl}")
     private String baseUrl;
+    private final RestTemplate restTemplate;
+    private final RecipeRepository recipeRepository;
 
-    public SpoonacularServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public SpoonacularServiceImpl(RestTemplateBuilder restTemplateBuilder, RecipeRepository RecipeRepository) {
         this.restTemplate = restTemplateBuilder.build();
+        this.recipeRepository = RecipeRepository;
     }
 
     @Override
@@ -44,7 +50,20 @@ public class SpoonacularServiceImpl implements SpoonacularService {
     public JsonObject search(String query) {
         String uri = String.format("%s/search?query=%s&apiKey=%s", baseUrl, query, apiKey);
         String response = this.restTemplate.getForObject(uri, String.class);
+        JsonObject jsonObject = JsonParser.parseString(response).getAsJsonObject();
 
-        return JsonParser.parseString(response).getAsJsonObject();
+        jsonObject.getAsJsonArray("results").forEach(result -> {
+            JsonObject recipe = result.getAsJsonObject();
+            RecipeEntity recipeEntity = new RecipeEntity();
+
+            if (Optional.ofNullable(recipe.get("id")).isPresent()) recipeEntity.setExternalId(recipe.get("id").getAsInt());
+            if (Optional.ofNullable(recipe.get("title")).isPresent()) recipeEntity.setTitle(recipe.get("title").getAsString());
+            if (Optional.ofNullable(recipe.get("image")).isPresent()) recipeEntity.setImage(recipe.get("image").getAsString());
+            if (Optional.ofNullable(recipe.get("servings")).isPresent()) recipeEntity.setServings(recipe.get("servings").getAsInt());
+            if (Optional.ofNullable(recipe.get("readyInMinutes")).isPresent()) recipeEntity.setReadyInMinutes(recipe.get("readyInMinutes").getAsInt());
+
+            recipeRepository.save(recipeEntity);
+        });
+        return jsonObject;
     }
 }

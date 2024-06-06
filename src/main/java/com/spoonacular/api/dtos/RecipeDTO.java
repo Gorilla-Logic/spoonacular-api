@@ -1,6 +1,7 @@
 package com.spoonacular.api.dtos;
 
 import com.spoonacular.api.models.RecipeEntity;
+
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -23,30 +24,32 @@ public record RecipeDTO(
         String sourceUrl,
         String image,
         int servings,
-        String title) {
+        String title,
+        int externalId) {
 
     public RecipeDTO(RecipeEntity p) {
         this(p.getId() == null ? new ObjectId().toHexString() : p.getId().toHexString(),
-            p.getReadyInMinutes(),
-            p.getSourceUrl(),
-            p.getImage(),
-            p.getServings(),
-            p.getTitle());
+                p.getReadyInMinutes(),
+                p.getSourceUrl(),
+                p.getImage(),
+                p.getServings(),
+                p.getTitle(),
+                p.getExternalId());
     }
 
     public RecipeEntity toRecipeEntity() {
         ObjectId _id = id == null ? new ObjectId() : new ObjectId(id);
-        return new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title);
+        return new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title, externalId);
     }
 
     public RecipeEntity toRecipeEntityUpdate(String id) {
         ObjectId _id = new ObjectId(id);
-        return new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title);
+        return new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title, externalId);
     }
 
     public RecipeEntity toRecipeEntityRate(String id, int rating, RecipeEntity RecipeEntity) {
         ObjectId _id = new ObjectId(id);
-        RecipeEntity recipeEntity = new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title);
+        RecipeEntity recipeEntity = new RecipeEntity(_id, readyInMinutes, sourceUrl, image, servings, title, externalId);
 
         List<Integer> ratings = RecipeEntity.getRatings();
         if (ratings == null) ratings = new ArrayList<Integer>();
