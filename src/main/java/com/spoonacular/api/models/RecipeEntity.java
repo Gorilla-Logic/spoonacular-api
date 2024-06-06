@@ -9,14 +9,20 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The RecipeEntity class represents a Recipe entity in the application.
- * It includes properties for id, readyInMinutes, sourceUrl, image, servings, title, and ratings.
- * The class includes constructors for creating a new RecipeEntity object with or without parameters.
- * It also includes getter and setter methods for each property.
- * The class overrides the equals, hashCode, and toString methods from the Object class.
- * The equals method is used to check if two RecipeEntity objects are equal based on their properties.
- * The hashCode method returns a hash code value for the object, which is used in hash-based collections such as HashMap and HashSet.
- * The toString method returns a string representation of the object, which can be useful for debugging.
+ * The RecipeEntity class is a model class in this Spring Boot application.
+ * The class includes the following fields:
+ * - id: An ObjectId representing the id of the recipe.
+ * - readyInMinutes: An integer representing the time required to prepare the recipe.
+ * - sourceUrl: A string representing the URL of the source of the recipe.
+ * - image: A string representing the URL of the image of the recipe.
+ * - servings: An integer representing the number of servings the recipe makes.
+ * - title: A string representing the title of the recipe.
+ * - ratings: A list of integers representing the ratings of the recipe.
+ * - externalId: An integer representing the external id of the recipe.
+ * The class includes a default constructor and a constructor that initializes all the fields of the class.
+ * The class includes getter and setter methods for all the fields.
+ * The class overrides the equals and hashCode methods from the Object class to compare RecipeEntity objects based on their fields.
+ * The class also overrides the toString method from the Object class to provide a string representation of the RecipeEntity object.
  */
 public class RecipeEntity {
 

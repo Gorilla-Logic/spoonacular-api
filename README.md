@@ -34,9 +34,10 @@ The Recipes API includes endpoints for:
 - Searching for recipes
 - Updating a recipe's information
 - Rating a recipe
-- Retrieving a recipe's rating.
+- Retrieving a recipe's rating
 
 ![spoonacular_swagger](./documents/spoonacular_swagger.png)
+![spoonacular_api_schema](./documents/spoonacular_api_schema.png)
 
 ### Spoonacular API
 
@@ -44,10 +45,11 @@ The Recipes API includes endpoints for:
 > Please see documentation on each Class for further explanation on how the API works.
 
 The Spoonacular API includes endpoints to:
-- Get recipes summary given a search criteria.
-- Get a recipe summary given an ID.
+- Get recipes summary given a search criteria. This action also populates the local MongoDB with recipes data.
+- Get a recipe summary given an ID. This action also updates a recipe in the local MongoDB by externalId.
 
 ![spoonacular_api_swagger](./documents/spoonacular_api_swagger.png)
+> The schema of the Spoonacular API corresponds to the same specified [here](https://spoonacular.com/food-api/docs).
 
 ## MongoDB
 

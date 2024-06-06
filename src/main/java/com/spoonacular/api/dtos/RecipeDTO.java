@@ -8,15 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The RecipeDTO record is a Data Transfer Object (DTO) used for transferring data between subsystems of the application.
- * It is used to represent a recipe in a form that is convenient for the client-side of the application.
- * It includes fields for id, readyInMinutes, sourceUrl, image, servings, and title.
- * The record also includes methods for converting between RecipeDTO and RecipeEntity objects.
- * These methods are used when retrieving data from the database and sending it to the client, or vice versa.
- * The RecipeDTO(RecipeEntity p) constructor is used to create a RecipeDTO object from a RecipeEntity object.
- * The toRecipeEntity() method is used to convert a RecipeDTO object back into a RecipeEntity object.
- * The toRecipeEntityUpdate(String id) method is used to convert a RecipeDTO object into a RecipeEntity object with a specific id.
- * The toRecipeEntityRate(String id, int rating, RecipeEntity RecipeEntity) method is used to convert a RecipeDTO object into a RecipeEntity object with a specific id and rating.
+ * The RecipeDTO record is a data transfer object in this Spring Boot application.
+ * The record includes the following fields:
+ * - id: A string representing the id of the recipe.
+ * - readyInMinutes: An integer representing the time required to prepare the recipe.
+ * - sourceUrl: A string representing the URL of the source of the recipe.
+ * - image: A string representing the URL of the image of the recipe.
+ * - servings: An integer representing the number of servings the recipe makes.
+ * - title: A string representing the title of the recipe.
+ * - externalId: An integer representing the external id of the recipe.
+ * The record includes a constructor that takes a RecipeEntity object as a parameter and initializes the fields of the record.
+ * The record includes several methods to convert the RecipeDTO to a RecipeEntity:
+ * - toRecipeEntity(): This method creates a new RecipeEntity object from the RecipeDTO.
+ * - toRecipeEntityUpdate(String id): This method creates a new RecipeEntity object from the RecipeDTO with a specified id.
+ * - toRecipeEntityRate(String id, int rating, RecipeEntity RecipeEntity): This method creates a new RecipeEntity object from the RecipeDTO with a specified id and rating.
  */
 public record RecipeDTO(
         String id,

@@ -15,12 +15,11 @@ import java.util.Optional;
 /**
  * The SpoonacularServiceImpl class is a service class in this Spring Boot application that implements the SpoonacularService interface.
  * The class is annotated with @Service, indicating that it's a service component in the Spring framework. It's automatically detected during classpath scanning.
- * The class includes a private field named restTemplate which is a Spring's central class for synchronous HTTP client-side access.
- * It also includes two private fields, apiKey and baseUrl, which are injected from the application's properties file.
- * The class includes a constructor that takes a RestTemplateBuilder object as a parameter. This constructor is used for dependency injection and to build the restTemplate.
+ * The class includes two private fields, apiKey and baseUrl, which are injected from the application's properties file. It also includes a RestTemplate object for making HTTP requests and a RecipeRepository object for interacting with the database.
+ * The class includes a constructor that takes a RestTemplateBuilder and a RecipeRepository object as parameters. This constructor is used for dependency injection and to build the restTemplate.
  * The class implements two methods from the SpoonacularService interface:
- * - findOne(int id): This method constructs the URI for the Spoonacular API, makes a GET request to the API, and returns a JsonObject that represents a recipe with the given id.
- * - search(String query): This method constructs the URI for the Spoonacular API, makes a GET request to the API, and returns a JsonObject that represents a recipe matching the given query string.
+ * - findOne(int id): This method constructs the URI for the Spoonacular API, makes a GET request to the API, and returns a JsonObject that represents a recipe with the given id. It also updates the corresponding recipe in the database.
+ * - search(String query): This method constructs the URI for the Spoonacular API, makes a GET request to the API, and returns a JsonObject that represents a recipe matching the given query string. It also saves the corresponding recipes in the database.
  */
 @Service
 public class SpoonacularServiceImpl implements SpoonacularService {

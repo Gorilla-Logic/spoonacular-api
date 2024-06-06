@@ -7,13 +7,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * The RecipeRepository interface is a part of the repository layer in the MVC architecture of this Spring Boot application.
- * It is used to interact with the database for operations related to RecipeEntity.
- * It is annotated with @Repository, indicating that it's a Data Access Object (DAO) providing the mechanism for storage, retrieval,
- * search, update and delete operation on objects.
- * The interface includes methods for saving a RecipeEntity, finding all RecipeEntity by their ids, finding a RecipeEntity by its id,
- * searching for RecipeEntity by a query string, updating a RecipeEntity, and getting the rating of a RecipeEntity by its id.
- * These methods are used to perform CRUD operations on the RecipeEntity table in the database.
+ * The RecipeRepository interface is a repository interface in this Spring Boot application.
+ * The interface is annotated with @Repository, indicating that it's a repository component in the Spring framework. It's automatically detected during classpath scanning.
+ * The interface defines several methods for interacting with the database:
+ * - save(RecipeEntity RecipeEntity): This method is intended to save a new RecipeEntity to the database and return it.
+ * - findAll(List<String> ids): This method is intended to find and return all RecipeEntity objects with the given ids from the database.
+ * - findOne(String id): This method is intended to find and return a RecipeEntity with the given id from the database.
+ * - findOneByExternalId(int externalId): This method is intended to find and return a RecipeEntity with the given external id from the database.
+ * - search(String query): This method is intended to find and return all RecipeEntity objects that match the given query from the database.
+ * - update(RecipeEntity RecipeEntity): This method is intended to update a RecipeEntity in the database and return it.
+ * - getRating(String id): This method is intended to calculate and return the average rating of a RecipeEntity with the given id from the database.
  */
 @Repository
 public interface RecipeRepository {
