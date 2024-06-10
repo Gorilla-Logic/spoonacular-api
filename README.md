@@ -7,7 +7,7 @@
 ![spoonacular_api](./documents/spoonacular_security_structure_diagram.png)
 
 `SecurityConfiguration.java` provides a `SecurityFilterChain` bean to define in the `authorizeHttpRequests` method that every endpoint with the pattern `/swagger-ui/**` should be public and require no authentication,
-with the purpose of using the Swagger UI to the test the API.
+with the purpose of using the Swagger UI to test the API.
 Authentication is required for all endpoints with pattern `/api/**`.
 The session management policy is set to STATELESS and the form login authentication disabled.
 For the sake of simplicity CORS and CSRF are disabled too.

@@ -60,7 +60,7 @@ public class RecipeController {
         return ResponseEntity.ok(recipeService.update(id, RecipeDTO));
     }
 
-    @PutMapping("recipes/{id}/rate/{rating}")
+    @PatchMapping("recipes/{id}/rate/{rating}")
     public ResponseEntity<String> rateRecipe(@RequestParam(name = "apiKey") String ApiKey,
                                              @PathVariable String id,
                                              @PathVariable int rating) {

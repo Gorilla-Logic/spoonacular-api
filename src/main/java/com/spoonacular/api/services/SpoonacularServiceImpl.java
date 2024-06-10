@@ -48,6 +48,7 @@ public class SpoonacularServiceImpl implements SpoonacularService {
         if (Optional.ofNullable(jsonObject.get("image")).isPresent()) recipeEntity.setImage(jsonObject.get("image").getAsString());
         if (Optional.ofNullable(jsonObject.get("servings")).isPresent()) recipeEntity.setServings(jsonObject.get("servings").getAsInt());
         if (Optional.ofNullable(jsonObject.get("readyInMinutes")).isPresent()) recipeEntity.setReadyInMinutes(jsonObject.get("readyInMinutes").getAsInt());
+        if (Optional.ofNullable(jsonObject.get("sourceUrl")).isPresent()) recipeEntity.setSourceUrl(jsonObject.get("sourceUrl").getAsString());
 
         recipeRepository.update(recipeEntity);
 
@@ -69,6 +70,7 @@ public class SpoonacularServiceImpl implements SpoonacularService {
             if (Optional.ofNullable(recipe.get("image")).isPresent()) recipeEntity.setImage(recipe.get("image").getAsString());
             if (Optional.ofNullable(recipe.get("servings")).isPresent()) recipeEntity.setServings(recipe.get("servings").getAsInt());
             if (Optional.ofNullable(recipe.get("readyInMinutes")).isPresent()) recipeEntity.setReadyInMinutes(recipe.get("readyInMinutes").getAsInt());
+            if (Optional.ofNullable(recipe.get("sourceUrl")).isPresent()) recipeEntity.setSourceUrl(recipe.get("sourceUrl").getAsString());
 
             recipeRepository.save(recipeEntity);
         });
